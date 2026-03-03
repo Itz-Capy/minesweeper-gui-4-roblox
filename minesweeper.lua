@@ -171,26 +171,26 @@ local function getNeighbors(x, y)
     return neighbors
 end
 
--- HUGE clearance feature - reveals large empty area
-local function hugeClearance(x, y)
-    local cleared = {}
-    local queue = {{x, y}}
-    local maxDistance = 4 -- How far to expand
+ -- HUGE clearance feature - reveals large empty area
+ local function hugeClearance(x, y)
+     local cleared = {}
+     local queue = {{x, y}}
+     local maxDistance = 4 -- How far to expand
     
-    while #queue > 0 do
-        local pos = table.remove(queue, 1)
-        local cx, cy = pos[1], pos[2]
-        local idx = getIndex(cx, cy)
+     while #queue > 0 do
+         local pos = table.remove(queue, 1)
+         local cx, cy = pos[1], pos[2]
+         local idx = getIndex(cx, cy)
         
-        if not revealed[idx] and not flagged[idx] and board[idx] >= 0 then
-            revealed[idx] = true
-            cleared[idx] = true
+         if not revealed[idx] and not flagged[idx] and board[idx] >= 0 then
+             revealed[idx] = true
+             cleared[idx] = true
             
-            -- Animate huge clearance
-            local tile = tiles[idx]
-            if tile then
-                tile.BackgroundColor3 = TILE_HUGE_CLEAR
-                tile.TextTransparency = 1
+             -- Animate huge clearance
+             local tile = tiles[idx]
+             if tile then
+                 tile.BackgroundColor3 = TILE_HUGE_CLEAR
+                 tile.TextTransparency = 1
                 
                 -- Tween to normal opened color
                 TweenService:Create(tile, TweenInfo.new(0.5, Enum.EasingStyle.Quad), {
